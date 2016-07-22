@@ -16,10 +16,13 @@ public class TranscriptViewController: UIViewController, SFSpeechRecognizerDeleg
     
     public var isAudioPlay = false
     
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(localeIdentifier: "en-US"))!
+    let speechRecognizer = SFSpeechRecognizer(locale: Locale(localeIdentifier: "en-US"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
-    private let audioEngine = AVAudioEngine()
+    let audioEngine = AVAudioEngine()
+    var timer: Timer?
+    
+    var counter = 0
     
     
     @IBOutlet weak var textView: UITextView!
@@ -27,10 +30,13 @@ public class TranscriptViewController: UIViewController, SFSpeechRecognizerDeleg
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
     
+    @IBOutlet weak var warningLabel: UILabel!
     // MARK: UIViewController
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        self.statusLabel.text = ""
+        self.warningLabel.text = ""
         if self.isAudioPlay == true {
             self.startButton.isHidden = true
             self.playButton.isHidden = false
@@ -84,8 +90,8 @@ public class TranscriptViewController: UIViewController, SFSpeechRecognizerDeleg
     // MARK: Interface Builder actions
     
     @IBAction func start(_ sender: UIButton) {
-        if audioEngine.isRunning {
-            self.audioEngine.stop()
+        if self.audioEngine.isRunning {
+            audioEngine.stop()
             self.recognitionRequest?.endAudio()
             self.startButton.isEnabled = false
             self.startButton.setTitle("Stopping", for: .disabled)
@@ -109,12 +115,18 @@ public class TranscriptViewController: UIViewController, SFSpeechRecognizerDeleg
         
         self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         
-        guard let inputNode = self.audioEngine.inputNode else { fatalError("Audio engine has no input node") }
+        guard let inputNode = audioEngine.inputNode else { fatalError("Audio engine has no input node") }
         guard let recognitionRequest = self.recognitionRequest else { fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object") }
         
         // A recognition task represents a speech recognition session.
         // We keep a reference to the task so that it can be cancelled.
-        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
+        if let timer = self.timer {
+            timer.invalidate()
+        }
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(TranscriptViewController.update), userInfo: nil, repeats: true)
+        
+        recognitionTask = self.speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
             self.handleResult(result: result, error: error, inputnode: inputNode)
         }
         
@@ -127,12 +139,30 @@ public class TranscriptViewController: UIViewController, SFSpeechRecognizerDeleg
         try self.audioEngine.start()
     }
     
+    func update() {
+        self.counter+=1
+        OperationQueue.main.addOperation {
+            self.statusLabel.text = String(self.counter)
+            if self.counter > 15 {
+                self.warningLabel.text = "Long silence..."
+            } else if self.counter > 25 {
+                self.warningLabel.text = "Ver long silence !!"
+            } else {
+                self.warningLabel.text = ""
+            }
+        }
+    }
 
     
     @IBAction func playAudio(_ sender: UIButton) {
         if let path = Bundle.main.urlForResource("test", withExtension: "m4a") {
             let recognizer = SFSpeechRecognizer()
             let request = SFSpeechURLRecognitionRequest(url: path)
+            if let timer = self.timer {
+                timer.invalidate()
+            }
+            self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(TranscriptViewController.update), userInfo: nil, repeats: true)
+            
             recognizer?.recognitionTask(with: request, resultHandler: { (result, error) in
                 self.handleResult(result: result, error: error, inputnode: nil)
             })
@@ -140,16 +170,20 @@ public class TranscriptViewController: UIViewController, SFSpeechRecognizerDeleg
     }
     
     //MARK: Result handler
+    
     func handleResult(result: SFSpeechRecognitionResult?, error: NSError?, inputnode: AVAudioInputNode?) {
         var isFinal = false
-        
+        self.counter = 0
         if let result = result {
-            self.textView.text = result.bestTranscription.formattedString
-            isFinal = result.isFinal
-            if isFinal == true {
+            OperationQueue.main.addOperation {
                 self.statusLabel.text = "Silence..."
-            } else {
-                self.statusLabel.text = "Listening..."
+                self.textView.text = result.bestTranscription.formattedString
+                isFinal = result.isFinal
+                if isFinal == true {
+                    self.statusLabel.text = "Finished."
+                } else {
+                    self.statusLabel.text = ""
+                }
             }
         }
         

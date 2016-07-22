@@ -102,6 +102,8 @@
 				TargetAttributes = {
 					B6B69FA81D40012500ABC48A = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = UDVJJPPP2F;
+						DevelopmentTeamName = "Debaprio banik (Personal Team)";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -303,6 +305,7 @@
 				B6B69FBD1D40012500ABC48A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

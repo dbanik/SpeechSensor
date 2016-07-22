@@ -81,12 +81,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeH-lL-OQa">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeH-lL-OQa">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="DBd-h9-hRz"/>
+                                    <constraint firstAttribute="height" constant="57" id="DBd-h9-hRz"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUn-rP-DV7">
@@ -99,6 +99,14 @@
                                     <action selector="playAudio:" destination="G8s-zV-9h4" eventType="touchUpInside" id="j3c-20-2oL"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpw-5P-WVs">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Xvc-K1-3Zi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -106,11 +114,14 @@
                             <constraint firstItem="ptg-1M-Ppi" firstAttribute="centerX" secondItem="0pE-1E-vtz" secondAttribute="centerX" id="1n4-QR-71d"/>
                             <constraint firstItem="ptg-1M-Ppi" firstAttribute="top" secondItem="ZdL-2m-1dG" secondAttribute="bottom" constant="149" id="2Sg-yZ-kd7"/>
                             <constraint firstItem="OVa-XE-qKi" firstAttribute="top" secondItem="MUn-rP-DV7" secondAttribute="bottom" constant="20" id="9Ub-dZ-KVc"/>
+                            <constraint firstItem="wpw-5P-WVs" firstAttribute="trailing" secondItem="0pE-1E-vtz" secondAttribute="trailingMargin" id="CBI-Ob-PwY"/>
                             <constraint firstItem="MUn-rP-DV7" firstAttribute="centerX" secondItem="0pE-1E-vtz" secondAttribute="centerX" id="J5u-Qm-6xg"/>
-                            <constraint firstItem="ptg-1M-Ppi" firstAttribute="top" secondItem="eeH-lL-OQa" secondAttribute="bottom" constant="61" id="Jbr-AI-eso"/>
+                            <constraint firstItem="ptg-1M-Ppi" firstAttribute="top" secondItem="eeH-lL-OQa" secondAttribute="bottom" constant="84" id="Jbr-AI-eso"/>
                             <constraint firstItem="ZdL-2m-1dG" firstAttribute="trailing" secondItem="0pE-1E-vtz" secondAttribute="trailingMargin" id="TQ2-JJ-V27"/>
                             <constraint firstItem="ZdL-2m-1dG" firstAttribute="leading" secondItem="0pE-1E-vtz" secondAttribute="leadingMargin" id="YBC-h2-A1y"/>
                             <constraint firstItem="eeH-lL-OQa" firstAttribute="trailing" secondItem="0pE-1E-vtz" secondAttribute="trailingMargin" id="cZ2-25-Kjj"/>
+                            <constraint firstItem="wpw-5P-WVs" firstAttribute="leading" secondItem="0pE-1E-vtz" secondAttribute="leadingMargin" id="f56-0U-Ydw"/>
+                            <constraint firstItem="MUn-rP-DV7" firstAttribute="top" secondItem="wpw-5P-WVs" secondAttribute="bottom" constant="31" id="jcn-aR-Cp5"/>
                             <constraint firstItem="ZdL-2m-1dG" firstAttribute="top" secondItem="baR-7B-SNR" secondAttribute="bottom" constant="8" id="k5T-s5-qgi"/>
                             <constraint firstItem="OVa-XE-qKi" firstAttribute="top" secondItem="ptg-1M-Ppi" secondAttribute="bottom" constant="20" id="tl0-w5-x2g"/>
                         </constraints>
@@ -120,6 +131,7 @@
                         <outlet property="startButton" destination="ptg-1M-Ppi" id="tUr-ms-diS"/>
                         <outlet property="statusLabel" destination="eeH-lL-OQa" id="sAY-WK-Igv"/>
                         <outlet property="textView" destination="ZdL-2m-1dG" id="Jh6-Hc-53M"/>
+                        <outlet property="warningLabel" destination="wpw-5P-WVs" id="CJh-PZ-piA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RvG-Da-3Y5" userLabel="First Responder" sceneMemberID="firstResponder"/>
