@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B6A8E25B1D42F0110072056F /* bunshaft.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B6A8E25A1D42F0110072056F /* bunshaft.mp3 */; };
+		B6A8E25D1D42F3160072056F /* creditcard.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B6A8E25C1D42F3160072056F /* creditcard.mp3 */; };
 		B6B69FAD1D40012500ABC48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B69FAC1D40012500ABC48A /* AppDelegate.swift */; };
 		B6B69FAF1D40012500ABC48A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B69FAE1D40012500ABC48A /* ViewController.swift */; };
 		B6B69FB21D40012500ABC48A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6B69FB01D40012500ABC48A /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B6A8E25A1D42F0110072056F /* bunshaft.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bunshaft.mp3; path = Assets.xcassets/bunshaft.mp3; sourceTree = "<group>"; };
+		B6A8E25C1D42F3160072056F /* creditcard.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = creditcard.mp3; path = Assets.xcassets/creditcard.mp3; sourceTree = "<group>"; };
 		B6B69FA91D40012500ABC48A /* SpeechSensor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechSensor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6B69FAC1D40012500ABC48A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6B69FAE1D40012500ABC48A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +62,8 @@
 		B6B69FAB1D40012500ABC48A /* SpeechSensor */ = {
 			isa = PBXGroup;
 			children = (
+				B6A8E25C1D42F3160072056F /* creditcard.mp3 */,
+				B6A8E25A1D42F0110072056F /* bunshaft.mp3 */,
 				B6B69FC01D401CA200ABC48A /* test.m4a */,
 				B6B69FAC1D40012500ABC48A /* AppDelegate.swift */,
 				B6B69FAE1D40012500ABC48A /* ViewController.swift */,
@@ -132,8 +138,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6B69FC11D401CA200ABC48A /* test.m4a in Resources */,
+				B6A8E25D1D42F3160072056F /* creditcard.mp3 in Resources */,
 				B6B69FB71D40012500ABC48A /* LaunchScreen.storyboard in Resources */,
 				B6B69FB41D40012500ABC48A /* Assets.xcassets in Resources */,
+				B6A8E25B1D42F0110072056F /* bunshaft.mp3 in Resources */,
 				B6B69FB21D40012500ABC48A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

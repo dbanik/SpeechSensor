@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Speech
+import AVFoundation
 
 public class TranscriptViewController: UIViewController, SFSpeechRecognizerDelegate {
     
@@ -20,6 +21,7 @@ public class TranscriptViewController: UIViewController, SFSpeechRecognizerDeleg
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     let audioEngine = AVAudioEngine()
+    var player = AVAudioPlayer()
     var timer: Timer?
     
     var counter = 0
@@ -146,7 +148,7 @@ public class TranscriptViewController: UIViewController, SFSpeechRecognizerDeleg
             if self.counter > 15 {
                 self.warningLabel.text = "Long silence..."
             } else if self.counter > 25 {
-                self.warningLabel.text = "Ver long silence !!"
+                self.warningLabel.text = "Very long silence !!"
             } else {
                 self.warningLabel.text = ""
             }
@@ -155,12 +157,20 @@ public class TranscriptViewController: UIViewController, SFSpeechRecognizerDeleg
 
     
     @IBAction func playAudio(_ sender: UIButton) {
-        if let path = Bundle.main.urlForResource("test", withExtension: "m4a") {
+        if let path = Bundle.main.urlForResource("creditcard", withExtension: "mp3") {
             let recognizer = SFSpeechRecognizer()
             let request = SFSpeechURLRecognitionRequest(url: path)
             if let timer = self.timer {
                 timer.invalidate()
             }
+            do{
+                self.player = try AVAudioPlayer(contentsOf:path)
+                self.player.prepareToPlay()
+                self.player.play()
+            }catch {
+                print("Error getting the audio file")
+            }
+            
             self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(TranscriptViewController.update), userInfo: nil, repeats: true)
             
             recognizer?.recognitionTask(with: request, resultHandler: { (result, error) in
@@ -192,7 +202,9 @@ public class TranscriptViewController: UIViewController, SFSpeechRecognizerDeleg
             if inputnode != nil {
                 inputnode?.removeTap(onBus: 0)
             }
-            
+//            if self.player.isPlaying == true {
+//                self.player.stop()
+//            }
             self.recognitionRequest = nil
             self.recognitionTask = nil
             self.textView.text = "Unable to receive speech"
